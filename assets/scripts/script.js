@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let index = Math.floor(items.length / 2); // Élément central
         const totalItems = items.length;
         const itemWidth = items[0].offsetWidth;
-        const gap = 20; // Espace entre les éléments
+        const gap = 30; // Espace entre les éléments
 
         function updateCarousel() {
             const offset = -(index * (itemWidth + gap)) + container.clientWidth / 2 - itemWidth / 2;
@@ -75,38 +75,10 @@ document.addEventListener("DOMContentLoaded", function () {
         container.style.transition = "transform 0.5s ease-in-out";
         updateCarousel();
     }
-    /* carrousel automatique */
-    // const slider = document.querySelector('.slider');
-    // const cards = document.querySelectorAll('.card');
-    // const totalCards = cards.length;    
 
-    // // Dupliquer les cartes pour donner l'illusion d'infinité
-    // for (let i = 0; i < totalCards; i++) {
-    //     const clone = cards[i].cloneNode(true);
-    //     slider.appendChild(clone);
-    // }
+ /* -------------------------- CARROUSEL (Automatique) -------------------------- */
 
-    // // Faire défiler de manière infinie
-    // let offset = 0;
-
-    // setInterval(function () {
-    //     offset -= 1; // On déplace d'un pixel à chaque intervalle
-    //     slider.style.transform = `translateX(${offset}px)`;
-
-    //     // Si la première carte est totalement sortie, on la réinitialise à la fin
-    //     if (Math.abs(offset) >= (cards[0].offsetWidth + 20) * totalCards) {
-    //         offset = 0;
-    //         slider.style.transition = "none"; // Désactiver la transition pendant la réinitialisation
-    //         slider.style.transform = `translateX(${offset}px)`;
-
-    //         setTimeout(function () {
-    //             slider.style.transition = "transform 0.3s ease"; // Réactiver la transition après réinitialisation
-    //         }, 50);
-    //     }
-    // }, 20); // Ajuste la vitesse ici (20ms pour plus de fluidité)
-
-    // Sélectionne le conteneur et le slider à l'intérieur
-    const sliderContainer = document.querySelector('.slider-container');
+    const sliderContainer = document.querySelector('#reassurance');
     const slider = sliderContainer.querySelector('.slider');
     const cards = slider.querySelectorAll('.card');
     const totalCards = cards.length;
@@ -121,12 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let paused = false;
 
     // Gestion du survol sur le conteneur pour mettre l'animation en pause
-    container.addEventListener('mouseenter', () => {
-    console.log('Entrée de la souris dans le conteneur');
+    sliderContainer.addEventListener('mouseenter', () => {
     paused = true;
     });
-    container.addEventListener('mouseleave', () => {
-    console.log('Sortie de la souris du conteneur');
+    sliderContainer.addEventListener('mouseleave', () => {
     paused = false;
     });
 
@@ -150,7 +120,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     requestAnimationFrame(animate);
     }
-
     animate();
+
+    /* -------------------------- Scroll-top -------------------------- */
+    const scrollTopButton = document.querySelector(".scroll-top");
+    if (scrollTopButton) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > window.innerHeight) {
+                scrollTopButton.classList.add("visible");
+            } else {
+                scrollTopButton.classList.remove("visible");
+            }
+        });
+
+        scrollTopButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
 });
 
