@@ -859,17 +859,13 @@ body {
         position: fixed;
         bottom: 20px;
         right: 20px;
+        box-shadow: 1 1 5px var(--color-secondary);
         z-index: 1000;
     }
 
     /* met un animation en boucle d'agrément du bouton call */
     .btn-call, .scroll-top {
         animation: pulse 2s infinite;
-    }
-
-    /* Ajout de l'effet néon */
-    .btn-call {
-        box-shadow: 1 1 5px var(--color-secondary);
     }
 
      /* Toggle Button */
